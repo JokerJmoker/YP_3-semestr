@@ -72,12 +72,12 @@ class BlackDragon(Dragon):
 
 
 class Trolle(Enemy):
-    def __init__(self, size):
-        super().__init__(health=None, attack=None) 
+    def __init__(self, size, health, attack):
+        super().__init__(health=health, attack=attack) 
         self._size = size
         self.__answer = None
         self.__quest = None
-        
+
     def set_answer(self, answer):
         self.__answer = answer
 
@@ -104,7 +104,7 @@ class OrdinaryTroll(Trolle):
     def __init__(self):
         super().__init__('обычный', health = 100, attack = 30)
 
-    def __factorize(n):
+    def __factorize(self,n):
         factors = []
         divisor = 2
         while n > 1:
@@ -117,8 +117,9 @@ class OrdinaryTroll(Trolle):
     def question(self):
         x = super().question()
         factors = self.__factorize(x)
-        self.__quest = 'Разложи число ' ,str(x), 'на множители и перечисли мне их в порядке возрастания'
-        self.set_answer(factors)
+        factors_str = ' '.join(map(str, factors))  # преобразование списка множителей в строку, разделенную пробелами
+        self.__quest = 'Разложи число ' + str(x) + ' на множители и перечисли мне их в порядке возрастания'
+        self.set_answer(factors_str)
         return self.__quest
      
 
@@ -127,7 +128,7 @@ class BigTroll(Trolle):
         super().__init__('большой', health = 200, attack = 50)
 
 
-    def __is_prime(n):
+    def __is_prime(self,n):
     
         if n <= 1:
             return 'Нет'
@@ -145,7 +146,7 @@ class BigTroll(Trolle):
     def question(self):
         x = super().question()
         ans = self.__is_prime(x)
-        self.__quest = 'Является ли число' ,str(x), 'простым? Да или Нет?'
+        self.__quest = 'Является ли число ' + str(x) + ' простым? Да или Нет?'
         self.set_answer(ans)
         return self.__quest
 
@@ -153,4 +154,6 @@ class BigTroll(Trolle):
 # красный дракон учит вычитанию, а чёрный -- умножению.
 
 
-enemy_types = [GreenDragon, RedDragon, BlackDragon, SmallTrolle, OrdinaryTroll, BigTroll]
+enemy_types = [SmallTrolle, OrdinaryTroll, BigTroll]
+
+# GreenDragon, RedDragon, BlackDragon, 

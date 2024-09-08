@@ -14,21 +14,43 @@ def annoying_input_int(message =''):
 
 
 def game_tournament(hero, enemy_list):
-    for dragon in enemy_list:
-        print('Вышел', dragon._color, 'дракон!')
-        while dragon.is_alive() and hero.is_alive():
-            print('Вопрос:', dragon.question())
-            answer = annoying_input_int('Ответ:')
+    for enemy in enemy_list:
+        if isinstance(enemy, Dragon):
+            print('Вышел', enemy._color, 'дракон!')
+            while enemy.is_alive() and hero.is_alive():
+                print('Вопрос:', enemy.question())
+                answer = annoying_input_int('Ответ:')
 
-            if dragon.check_answer(answer):
-                hero.attack(dragon)
-                print('Верно! \n** дракон кричит от боли **')
-            else:
-                dragon.attack(hero)
-                print('Ошибка! \n** вам нанесён удар... **')
-        if dragon.is_alive():
-            break
-        print('Дракон', dragon._color, 'повержен!\n')
+                if enemy.check_answer(answer):
+                    hero.attack(enemy)
+                    print('Верно! \n** дракон кричит от боли **')
+                else:
+                    enemy.attack(hero)
+                    print('Ошибка! \n** вам нанесён удар... **')
+            if enemy.is_alive():
+                break
+            print('Дракон', enemy._color, 'повержен!\n')
+
+        if isinstance(enemy, Trolle):
+            print('Вышел', enemy._size, 'тролль!')
+            while enemy.is_alive() and hero.is_alive():
+                print('Вопрос:', enemy.question())
+                answer = annoying_input_int('Ответ:')
+
+                if enemy.check_answer(answer):
+                    hero.attack(enemy)
+                    print('Верно! \n** тролль проклинает вашу мудрость **')
+                else:
+                    enemy.attack(hero)
+                    print('Ошибка! \n** вам нанесён удар... **')
+            if enemy.is_alive():
+                break
+            print('Тролль', enemy._size, 'повержен!\n')
+
+        else:
+            print ("искусственный интеллект ")
+        
+
 
 
     if hero.is_alive():
