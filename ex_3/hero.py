@@ -18,7 +18,6 @@ class Hero(Attacker):
     
     def attack(self, target):
         super().attack(target)
-        if not target.is_alive():
-            self._experience += 10  
+        
             
     

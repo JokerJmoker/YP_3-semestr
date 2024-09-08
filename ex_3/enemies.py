@@ -94,7 +94,7 @@ class SmallTrolle(Trolle):
         super().__init__('маленький' , health = 50, attack = 10)
 
     def question(self):
-        x = randint(1, 5)
+        x = randint(1, 4)
         self.__quest = str('Какое число от 1 до 5 я загадал?')
         self.set_answer(str(x))
         return self.__quest
@@ -157,6 +157,6 @@ class BigTroll(Trolle):
 # красный дракон учит вычитанию, а чёрный -- умножению.
 
 
-enemy_types = [OrdinaryTroll]
+enemy_types = [GreenDragon, RedDragon, BlackDragon, SmallTrolle, OrdinaryTroll, BigTroll]
 
 # GreenDragon, RedDragon, BlackDragon, 
