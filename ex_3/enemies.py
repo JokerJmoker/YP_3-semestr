@@ -82,7 +82,7 @@ class Trolle(Enemy):
         self.__answer = answer
 
     def check_answer(self, answer):
-        return answer == self.__answer
+        return answer.lower() == self.__answer.lower()
     
     def question(self):
         x = randint(1, 100)
@@ -96,7 +96,7 @@ class SmallTrolle(Trolle):
     def question(self):
         x = randint(1, 5)
         self.__quest = str('Какое число от 1 до 5 я загадал?')
-        self.set_answer(x)
+        self.set_answer(str(x))
         return self.__quest
 
 
@@ -119,7 +119,7 @@ class OrdinaryTroll(Trolle):
         factors = self.__factorize(x)
         factors_str = ' '.join(map(str, factors))  # преобразование списка множителей в строку, разделенную пробелами
         self.__quest = 'Разложи число ' + str(x) + ' на множители и перечисли мне их в порядке возрастания'
-        self.set_answer(factors_str)
+        self.set_answer(str(factors_str))
         return self.__quest
      
 
@@ -147,13 +147,13 @@ class BigTroll(Trolle):
         x = super().question()
         ans = self.__is_prime(x)
         self.__quest = 'Является ли число ' + str(x) + ' простым? Да или Нет?'
-        self.set_answer(ans)
+        self.set_answer(str(ans))
         return self.__quest
 
 #FIXME здесь также должны быть описаны классы RedDragon и BlackDragon
 # красный дракон учит вычитанию, а чёрный -- умножению.
 
 
-enemy_types = [SmallTrolle, OrdinaryTroll, BigTroll]
+enemy_types = [BigTroll]
 
 # GreenDragon, RedDragon, BlackDragon, 

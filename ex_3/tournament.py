@@ -12,6 +12,14 @@ def annoying_input_int(message =''):
             print('Вы ввели недопустимые символы')
     return answer
 
+def annoying_input_str(message=''):
+    answer = None
+    while answer is None:
+        answer = input(message)
+        if not isinstance(answer, str):
+            print('Вы ввели недопустимые символы')
+            answer = None
+    return answer
 
 def game_tournament(hero, enemy_list):
     for enemy in enemy_list:
@@ -35,7 +43,7 @@ def game_tournament(hero, enemy_list):
             print('Вышел', enemy._size, 'тролль!')
             while enemy.is_alive() and hero.is_alive():
                 print('Вопрос:', enemy.question())
-                answer = annoying_input_int('Ответ:')
+                answer = annoying_input_str('Ответ:')
 
                 if enemy.check_answer(answer):
                     hero.attack(enemy)
@@ -66,9 +74,9 @@ def start_game():
         print('Представьтесь, пожалуйста: ', end = '')
         hero = Hero(input())
 
-        enemy_number = 3
+        enemy_number = 1
         enemy_list = generate_enemy_list(enemy_number)
-        assert(len(enemy_list) == 3)
+        assert(len(enemy_list) == 1)
         print('У Вас на пути', enemy_number, 'врагов!')
         game_tournament(hero, enemy_list)
 
