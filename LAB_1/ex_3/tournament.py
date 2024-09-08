@@ -65,8 +65,8 @@ def game_tournament(hero, enemy_list):
             hero._experience += 10
             print('Вы звбираете капельку его жизни и накопленный опыт! \n')
             print('Теперь у вас', int(hero._health), 'очков жизни', hero._experience, "очков опыта \n")
-        else:
-            print ("искусственный интеллект ")
+        #else:
+        #    print ("искусственный интеллект ")
         
     if hero.is_alive():
         print('Поздравляем! Вы победили!')

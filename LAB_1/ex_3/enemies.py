@@ -95,7 +95,7 @@ class SmallTrolle(Trolle):
 
     def question(self):
         x = randint(1, 4)
-        self.__quest = str('Какое число от 1 до 5 я загадал?')
+        self.__quest = str('Какое число от 1 до 4 я загадал?')
         self.set_answer(str(x))
         return self.__quest
 
