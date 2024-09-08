@@ -13,8 +13,8 @@ def annoying_input_int(message =''):
     return answer
 
 
-def game_tournament(hero, dragon_list):
-    for dragon in dragon_list:
+def game_tournament(hero, enemy_list):
+    for dragon in enemy_list:
         print('Вышел', dragon._color, 'дракон!')
         while dragon.is_alive() and hero.is_alive():
             print('Вопрос:', dragon.question())
@@ -30,6 +30,7 @@ def game_tournament(hero, dragon_list):
             break
         print('Дракон', dragon._color, 'повержен!\n')
 
+
     if hero.is_alive():
         print('Поздравляем! Вы победили!')
         print('Ваш накопленный опыт:', hero._experience)
@@ -43,11 +44,11 @@ def start_game():
         print('Представьтесь, пожалуйста: ', end = '')
         hero = Hero(input())
 
-        dragon_number = 3
-        dragon_list = generate_dragon_list(dragon_number)
-        assert(len(dragon_list) == 3)
-        print('У Вас на пути', dragon_number, 'драконов!')
-        game_tournament(hero, dragon_list)
+        enemy_number = 3
+        enemy_list = generate_enemy_list(enemy_number)
+        assert(len(enemy_list) == 3)
+        print('У Вас на пути', enemy_number, 'врагов!')
+        game_tournament(hero, enemy_list)
 
     except EOFError:
         print('Поток ввода закончился. Извините, принимать ответы более невозможно.')
