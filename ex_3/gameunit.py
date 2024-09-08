@@ -3,9 +3,10 @@
 
 
 class Attacker:
-    _health = None
-    _attack = None
-
+    def __init__(self, health, attack):
+        self._health = health
+        self._attack = attack
+        
     def attack(self, target):
         target._health -= self._attack
 

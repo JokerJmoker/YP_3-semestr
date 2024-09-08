@@ -19,10 +19,11 @@ def generate_dragon_list(enemy_number):
 
 
 class Dragon(Enemy):
-    def __init__(self,color,answer,quest):
+    def __init__(self, color):
+        super().__init__(health=100, attack=30)  # Задаем здоровье и атаку дракона
         self._color = color
-        self.__answer = answer
-        self.__quest = quest
+        self.__answer = None
+        self.__quest = None
         
     def set_answer(self, answer):
         self.__answer = answer
@@ -31,35 +32,41 @@ class Dragon(Enemy):
         return answer == self.__answer
     
     def question(self):
-        x = randint(1,100)
-        y = randint(1,100)
+        x = randint(1, 100)
+        y = randint(1, 100)
         return x, y 
     
 
 class GreenDragon(Dragon):
     def __init__(self):
-        self._health = 200
-        self._attack = 10
-        self._color = 'зелёный'
+        super().__init__('зелёный')
 
     def question(self):
-        x = randint(1,100)
-        y = randint(1,100)
+        x,y = super().question()
         self.__quest = str(x) + '+' + str(y)
         self.set_answer(x + y)
         return self.__quest
     
+
 class RedDragon(Dragon):
     def __init__(self):
-        self._health = 200
-        self._attack = 10
-        self._color = 'красный'
+        super().__init__('красный')
 
     def question(self):
-        x = randint(1,100)
-        y = randint(1,100)
-        self.__quest = str(x) - '-' - str(y)
+        x,y = super().question()
+        self.__quest = str(x) + '-' + str(y)
         self.set_answer(x - y)
+        return self.__quest
+    
+    
+class BlackDragon(Dragon):
+    def __init__(self):
+        super().__init__("черный")
+
+    def question(self):
+        x,y = super().question()
+        self.__quest = str(x) + '*' + str(y)
+        self.set_answer(x * y)
         return self.__quest
 
 
