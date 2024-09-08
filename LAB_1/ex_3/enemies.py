@@ -130,7 +130,6 @@ class BigTroll(Trolle):
     def __init__(self):
         super().__init__('большой', health = 200, attack = 50)
 
-
     def __is_prime(self,n):
     
         if n <= 1:
@@ -152,11 +151,8 @@ class BigTroll(Trolle):
         self.__quest = 'Является ли число ' + str(x) + ' простым? Да или Нет?'
         self.set_answer(ans)
         return self.__quest
-
-#FIXME здесь также должны быть описаны классы RedDragon и BlackDragon
-# красный дракон учит вычитанию, а чёрный -- умножению.
-
+    
 
 enemy_types = [GreenDragon, RedDragon, BlackDragon, SmallTrolle, OrdinaryTroll, BigTroll]
 
-# GreenDragon, RedDragon, BlackDragon, 
+ 
