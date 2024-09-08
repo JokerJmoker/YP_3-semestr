@@ -150,7 +150,7 @@ class BigTroll(Trolle):
         x = super().question()
         ans = self.__is_prime(x)
         self.__quest = 'Является ли число ' + str(x) + ' простым? Да или Нет?'
-        self.set_answer(str(ans))
+        self.set_answer(ans)
         return self.__quest
 
 #FIXME здесь также должны быть описаны классы RedDragon и BlackDragon
