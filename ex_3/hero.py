@@ -18,8 +18,7 @@ class Hero(Attacker):
     
     def attack(self, target):
         super().attack(target)
-        print(f'{self._name} атакует {target._color} дракона и наносит {self._attack} урона!')
         if not target.is_alive():
             self._experience += 10  
-            print(f'{self._name} победил дракона и получил 10 опыта!')
+            
     
