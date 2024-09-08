@@ -104,8 +104,11 @@ class OrdinaryTroll(Trolle):
     def __init__(self):
         super().__init__('обычный', health = 100, attack = 30)
 
-    def __factorize(self,n):
+    def __factorize(self, n):
         factors = []
+        if n == 1:
+            factors.append(1)
+            return factors
         divisor = 2
         while n > 1:
             while n % divisor == 0:
@@ -117,9 +120,9 @@ class OrdinaryTroll(Trolle):
     def question(self):
         x = super().question()
         factors = self.__factorize(x)
-        factors_str = ' '.join(map(str, factors))  # преобразование списка множителей в строку, разделенную пробелами
-        self.__quest = 'Разложи число ' + str(x) + ' на множители и перечисли мне их в порядке возрастания'
-        self.set_answer(str(factors_str))
+        factors_str = ' '.join(map(str, factors)) # преобразование списка множителей в строку, разделенную пробелами
+        self.__quest = 'Разложи число ' + str(x) + ' на простые множители и перечисли мне их в порядке возрастания'
+        self.set_answer(factors_str)
         return self.__quest
      
 
@@ -154,6 +157,6 @@ class BigTroll(Trolle):
 # красный дракон учит вычитанию, а чёрный -- умножению.
 
 
-enemy_types = [BigTroll]
+enemy_types = [OrdinaryTroll]
 
 # GreenDragon, RedDragon, BlackDragon, 
