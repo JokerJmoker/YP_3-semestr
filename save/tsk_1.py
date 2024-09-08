@@ -10,7 +10,7 @@ def input_numbers():
     print("Введите число или End \n")
     while True:
         input_sth = input()
-        if input_sth.lower() == "end": # нивелируем значение регистра
+        if input_sth.lower() == "end":
             break
         try:
             number = float(input_sth)  # Преобразует введенные числа к типу float
