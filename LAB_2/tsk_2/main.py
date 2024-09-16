@@ -6,15 +6,15 @@ if __name__ == '__main__':
     
     if task == 2:
         tsk_2_2.tsk_2_2()
-    if input() == 3:
-        tsk_2_3()
-    if input() == 4:
-        tsk_2_4()
-    if input() == 5:
-        tsk_2_5()
-    if input() == 6:
-        tsk_2_6()
-    if input() == 7:
-        tsk_2_7()
+    elif task == 3:
+        tsk_2_3.tsk_2_3()
+    elif task == 4:
+        tsk_2_4.tsk_2_4()
+    elif task == 5:
+        tsk_2_5.tsk_2_5()
+    elif task == 6:
+        tsk_2_6.tsk_2_6()
+    elif task == 7:
+        tsk_2_7.tsk_2_7()
     else:
         print("Неверный выбор задания.")
