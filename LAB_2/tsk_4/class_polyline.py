@@ -1,39 +1,31 @@
-import pygame
-from class_vec2D import Vec2D
-from display import gameDisplay
+import pygame 
+from class_vec2D import Vec2d
+
 
 class Polyline:
     def __init__(self):
-        self.points = []  # список точек Vec2D
-        self.velocities = []  # список скоростей для каждой точки
+        self.points = []
+        self.speeds = []
 
-
-    def add_point(self, point, velocity): # \\\ добавлено
-        """Добавление точки с её скоростью."""
+    def add_point(self, point, speed):
         self.points.append(point)
-        self.velocities.append(velocity)
+        self.speeds.append(speed)
 
-
-    def set_points(self): # пересчёт координат точек с учётом их скоростей \\\ добавлено
+    def set_points(self, screen_dim):
         for i in range(len(self.points)):
-            self.points[i] += self.velocities[i]
+            self.points[i] = self.points[i] + self.speeds[i]
+            if self.points[i].x > screen_dim[0] or self.points[i].x < 0:
+                self.speeds[i] = Vec2d(-self.speeds[i].x, self.speeds[i].y)
+            if self.points[i].y > screen_dim[1] or self.points[i].y < 0:
+                self.speeds[i] = Vec2d(self.speeds[i].x, -self.speeds[i].y)
 
-            # обработка выхода точки за границы экрана 
-            if self.points[i].x > 800 or self.points[i].x < 0:
-                self.velocities[i] = Vec2D(-self.velocities[i].x, self.velocities[i].y)
-            if self.points[i].y > 600 or self.points[i].y < 0:
-                self.velocities[i] = Vec2D(self.velocities[i].x, -self.velocities[i].y)
-
-    @staticmethod
-    def draw_points(points, style="points", width=3, color=(255, 255, 255)):
-        """функция отрисовки точек на экране"""
+    def draw_points(self, game_display, style="line", width=3, color=(255, 255, 255)):
         if style == "line":
-            for p_n in range(-1, len(points) - 1):
-                pygame.draw.line(gameDisplay, color,
-                                (int(points[p_n][0]), int(points[p_n][1])),
-                                (int(points[p_n + 1][0]), int(points[p_n + 1][1])), width)
-
+            for p_n in range(-1, len(self.points) - 1):
+                pygame.draw.line(game_display, color,
+                                 self.points[p_n].int_pair(),
+                                 self.points[p_n + 1].int_pair(), width)
         elif style == "points":
-            for p in points:
-                pygame.draw.circle(gameDisplay, color,
-                                (int(p[0]), int(p[1])), width)
+            for point in self.points:
+                pygame.draw.circle(game_display, color,
+                                   point.int_pair(), width)
