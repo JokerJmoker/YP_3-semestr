@@ -20,7 +20,7 @@ def find_max_area(points):
         current_area = triangle_area(p1, p2, p3)
         if current_area > max_area:
             max_area = current_area
-    return max_area
+    return f'{max_area:.2f}'
 
 
 def tsk_2_7():

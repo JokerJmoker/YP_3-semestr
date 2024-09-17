@@ -13,13 +13,11 @@ def calc_perimeter_between_3_points(point1, point2, point3):
 def find_max_perimeter(points):
     """Находит максимальный периметр треугольника, образованного тремя точками"""
     max_perimeter = 0
-    max_triangle = None
     
     for p1, p2, p3 in combinations(points, 3):
         current_perimeter = calc_perimeter_between_3_points(p1, p2, p3)
         if current_perimeter > max_perimeter:
             max_perimeter = current_perimeter
-            max_triangle = (p1, p2, p3)
     
     return f' {max_perimeter:.2f} '
 

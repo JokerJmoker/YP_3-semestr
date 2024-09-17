@@ -32,7 +32,7 @@ class Vector:
     # /
     def __truediv__(self, scalar):
         if scalar == 0:
-            raise ValueError("Cannot divide by zero.")
+            raise ValueError(" :0 ! ")
         return Vector(self.x / scalar, self.y / scalar, self.z / scalar)
 
     # ==

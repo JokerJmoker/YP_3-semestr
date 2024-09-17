@@ -5,7 +5,7 @@ def find_center_of_mass(points):
     if not points:
         return None
 
-    total_vector = Vector(0, 0, 0)
+    total_vector = Vector(0, 0, 0) # вектор, к которму суммируются все отсальные
     
     for point in points:
         total_vector += point
