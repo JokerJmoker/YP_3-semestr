@@ -30,7 +30,7 @@ class Vec2D:
 
     def __truediv__(self, scalar):
         if scalar == 0:
-            raise ValueError("Деление на ноль!")
+            raise ValueError(":0 !")
         return Vec2D(self.x / scalar, self.y / scalar)
 
     def __eq__(self, other):
@@ -69,19 +69,23 @@ class Polyline:
             if self.points[i].y > 600 or self.points[i].y < 0:
                 self.velocities[i] = Vec2D(self.velocities[i].x, -self.velocities[i].y)
 
-    def draw_points(self, surface, style="points", width=3, color=(255, 255, 255)): # без изменений
-        if style == "line" and len(self.points) > 1:
-            for p_n in range(-1, len(self.points) - 1):
-                pygame.draw.line(surface, color, self.points[p_n].int_pair(),
-                                 self.points[p_n + 1].int_pair(), width)
+    def draw_points(self, points, style="points", width=3, color=(255, 255, 255)):
+        """функция отрисовки точек на экране"""
+        if style == "line":
+            for p_n in range(-1, len(points) - 1):
+                pygame.draw.line(gameDisplay, color,
+                                (int(points[p_n][0]), int(points[p_n][1])),
+                                (int(points[p_n + 1][0]), int(points[p_n + 1][1])), width)
+
         elif style == "points":
-            for p in self.points:
-                pygame.draw.circle(surface, color, p.int_pair(), width)
+            for p in points:
+                pygame.draw.circle(gameDisplay, color,
+                                (int(p[0]), int(p[1])), width)
 
 
-def draw_help(surface, steps):
-    """Функция отрисовки экрана справки программы"""
-    surface.fill((50, 50, 50))
+def draw_help():
+    """функция отрисовки экрана справки программы"""
+    gameDisplay.fill((50, 50, 50))
     font1 = pygame.font.SysFont("courier", 24)
     font2 = pygame.font.SysFont("serif", 24)
     data = []
@@ -93,11 +97,13 @@ def draw_help(surface, steps):
     data.append(["", ""])
     data.append([str(steps), "Current points"])
 
-    pygame.draw.lines(surface, (255, 50, 50), True, [
+    pygame.draw.lines(gameDisplay, (255, 50, 50, 255), True, [
         (0, 0), (800, 0), (800, 600), (0, 600)], 5)
     for i, text in enumerate(data):
-        surface.blit(font1.render(text[0], True, (128, 128, 255)), (100, 100 + 30 * i))
-        surface.blit(font2.render(text[1], True, (128, 128, 255)), (200, 100 + 30 * i))
+        gameDisplay.blit(font1.render(
+            text[0], True, (128, 128, 255)), (100, 100 + 30 * i))
+        gameDisplay.blit(font2.render(
+            text[1], True, (128, 128, 255)), (200, 100 + 30 * i))
 
 
 
@@ -122,21 +128,23 @@ class Knot(Polyline):
             res.extend(self.get_points(ptn, count))
         return res
 
-    def get_points(self, base_points, count):
-        """Получение точек кривой"""
-        alpha = 1 / count
-        res = []
-        for i in range(count):
-            res.append(self.get_point(base_points, i * alpha))
-        return res
 
-    def get_point(self, points, alpha, deg=None):
+    def get_point(self, points, alpha, deg=None): # const
         """Вычисление точки на основе рекурсивного деления"""
         if deg is None:
             deg = len(points) - 1
         if deg == 0:
             return points[0]
         return points[deg] * alpha + self.get_point(points, alpha, deg - 1) * (1 - alpha)
+
+
+    def get_points(self, base_points, count): # const
+        """Получение точек кривой"""
+        alpha = 1 / count
+        res = []
+        for i in range(count):
+            res.append(self.get_point(base_points, i * alpha))
+        return res
 
     def set_points(self):
         """Пересчёт точек кривой с пересчётом опорных точек"""
