@@ -51,4 +51,8 @@ b = Complex (7, 8)
 
 print (a)
 print (b)
+print(f'|{a}| = {abs(a):.2f}')
 print (a+b)
+print (a-b)
+print (a*b)
+print (a/b)
