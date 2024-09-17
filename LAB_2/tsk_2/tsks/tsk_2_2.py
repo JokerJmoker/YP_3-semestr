@@ -1,4 +1,5 @@
-from vectors_math import Vector  
+from vectors_math import Vector, math
+
 
 def find_farthest_point(points):
     """Находит и возвращает точку, наиболее удаленную от начала координат"""
@@ -6,25 +7,16 @@ def find_farthest_point(points):
     max_distance = -1
     
     for point in points:
-        distance = point.distance_from_origin()
+        distance = math.sqrt(point.x**2 + point.y**2 + point.z**2)
         if distance > max_distance:
             max_distance = distance
             farthest_point = point
     
     return farthest_point
 
-def get_result_tsk_2_2(N):
-    """Запрашивает координаты точек и возвращает строку с наиболее удаленной точкой"""
-    points = []
-    for _ in range(N):
-        coords = input("Введите координаты точки (x,y,z): ")
-        points.append(Vector(coords))
-
-    farthest_point = find_farthest_point(points)
-    return f'Наиболее удаленная точка от начала отсчета имеет следующие координаты: {farthest_point}'
 
 def tsk_2_2():
-    """Получает количество точек и выводит наиболее удаленную точку"""
-    N = int(input("Введите количество точек: "))
-    result = get_result_tsk_2_2(N)
+    number_of_points = int(input("Введите количество точек: "))
+    text = 'Наиболее удаленная точка от начала отсчета имеет координаты:'
+    result = Vector.get_result_for_several_points(number_of_points, find_farthest_point, text)
     print(result)

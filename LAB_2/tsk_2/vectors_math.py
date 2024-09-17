@@ -40,7 +40,34 @@ class Vector:
 
         return self.x == other.x and self.y == other.y and self.z == other.z
     
+    # [a,b]
+    @classmethod
+    def cross_product(cls, vec1, vec2):
+        """Вычисляет векторное произведение двух векторов"""
+        x = vec1.y * vec2.z - vec1.z * vec2.y
+        y = vec1.z * vec2.x - vec1.x * vec2.z
+        z = vec1.x * vec2.y - vec1.y * vec2.x
+        return cls(x, y, z)
 
-    # Метод для второго задания
-    def distance_from_origin(self):
-        return math.sqrt(self.x**2 + self.y**2 + self.z**2)
+    # (a,b)
+    @staticmethod
+    def dot_product(vec1, vec2):
+        """Вычисляет скалярное произведение двух векторов"""
+        return vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z
+
+    @staticmethod
+    def get_result_for_several_points(number_of_points,function_for_points,text):
+        points = []
+    
+        for point in range(number_of_points):
+            coords = input("Введите координаты точки (x,y,z): ")
+            points.append(Vector(coords))
+
+        answer = function_for_points(points)
+        return f'{text} , {answer}'
+    
+    
+    @staticmethod
+    def input_vector(text):
+        coords = input(text).strip() 
+        return Vector(coords)  # передача строки в конструктор

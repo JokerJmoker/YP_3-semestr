@@ -46,7 +46,7 @@ class Complex():
             return f"{self.real_part} - {abs(self.imaginary_part)}i"
         
 
-a = Complex (5, 6)
+a = Complex (5, -6)
 b = Complex (7, 8)
 
 print (a)
