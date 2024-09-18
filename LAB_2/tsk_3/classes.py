@@ -69,3 +69,19 @@ class B(BaseExtended):
 class C(BaseExtended):
     def get_loss(self):
         return sum([abs(x - y) for (x, y) in zip(self.data, self.result)])
+    
+data = [0.1, 0.4, 0.6, 0.8]
+result = [0, 0, 1, 1]
+
+a = A(data, result)
+b = B(data, result)
+c = C(data, result)
+
+print("A loss:", a.get_loss())
+print("A score:", a.get_score())
+
+print("B loss:", b.get_loss())
+print("B score:", b.get_score())
+
+print("C loss:", c.get_loss())
+print("C score:", c.get_score())
