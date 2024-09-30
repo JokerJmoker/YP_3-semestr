@@ -38,4 +38,4 @@ async def main():
 
 # Запуск программы
 if __name__ == '__main__':
-    asyncio.run(main())  # Используем asyncio.run для запуска
+    asyncio.run(main())  
