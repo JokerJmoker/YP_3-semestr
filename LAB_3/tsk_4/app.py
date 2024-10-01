@@ -24,8 +24,8 @@ async def main():
         await bot.delete_webhook(drop_pending_updates=True) # пропуск обновлений, пока бот был оффлайн
         print("Bot webhook deleted successfully.")
         await dp.start_polling(bot, allowed_updates=ALLOWED_UPDATES)
-    except Exception as e:
-        print(f"Error occurred: {e}")
+    except Exception as exception:
+        print('ошибка', exception)
 
 if __name__ == '__main__':
     asyncio.run(main())
