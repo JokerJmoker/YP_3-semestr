@@ -10,7 +10,7 @@ from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 
 # импорты проекта 
-from handlers.user_private import user_private_router
+from handlers.user_private import user_private_router # управляет обработкой команд и сообщений от пользователей
 ALLOWED_UPDATES = ['message', 'edited_message']
 
 # Создание экземпляров классов: бота и диспетчера
