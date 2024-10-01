@@ -2,26 +2,27 @@ import multiprocessing
 import tkinter as tk
 from tkinter import messagebox
 
+# функция для дальнейшей передачи списка list в подпроцессы 
+def worker(list):
+    list.append('item')
 
-def worker(lst):
-    lst.append('item')
-
-
+#  функция, запускающая несколько процессов и обрабатывающая их результаты.
 def run_processes():
-    manager = multiprocessing.Manager()
+    manager = multiprocessing.Manager()  # интерфейс для создания общих объектов 
     LIST = manager.list()
 
     processes = [
         multiprocessing.Process(target=worker, args=(LIST,))
         for _ in range(5)
-    ]
+    ]  # например 5 процессов 
+    # запуск и ожидание завершения процессов
     for p in processes:
         p.start()
     for p in processes:
         p.join()
 
-    result = " ".join(LIST)
-    messagebox.showinfo("Результат", f"Список после выполнения процессов: {result}")
+    result = " ".join(LIST)  # объединение элементов списка в одну строку, при разделении их пробелами.
+    messagebox.showinfo("Результат", "Список после выполнения процессов: {}".format(result))
 
 
 if __name__ == "__main__":
