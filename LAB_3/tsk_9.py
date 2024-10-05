@@ -2,6 +2,7 @@ import multiprocessing
 import tkinter as tk
 from tkinter import messagebox
 
+
 # функция для дальнейшей передачи списка list в подпроцессы 
 def worker(list):
     list.append('item')

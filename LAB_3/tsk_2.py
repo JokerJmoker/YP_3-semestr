@@ -4,7 +4,7 @@ import asyncio
 
 async def google_session(): # 
     async with aiohttp.ClientSession() as session:
-        async with session.get('http://google.com') as resp:
+        async with session.get('https://www.google.ru/?hl=ru') as resp:
             text = await resp.text()
             print('{:.70}...'.format(text))
 
@@ -24,4 +24,3 @@ if __name__ == '__main__':
                     web.get('/{name}', handle)])
 
     web.run_app(app)
-    

@@ -4,7 +4,7 @@ from aiogram import types, Router
 from aiogram.filters import Command
 from functions import search_image_google
 
-user_private_router = Router()
+user_private_router = Router() # позволяет разделить обработку разгных команд 
 
 # декоратор, который определяет функцию-обработчик для команд /start 
 @user_private_router.message(Command("start"))
