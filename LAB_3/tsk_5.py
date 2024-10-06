@@ -4,14 +4,27 @@ import time
 import sys
 
 
+
 def thread_job():
-    with lock: # контекстный менеджером  + эксклюзивный доступ 
+   with lock: # контекстный менеджером  + эксклюзивный доступ 
         global counter
         old_counter = counter
         time.sleep(random.randint(0, 1))
         counter = old_counter + 1
         print('{} '.format(counter), end='')
         sys.stdout.flush()
+
+
+"""def thread_job(): 
+    # контекстный менеджером  + эксклюзивный доступ 
+    lock.acquire()
+    global counter
+    old_counter = counter
+    time.sleep(random.randint(0, 1))
+    counter = old_counter + 1
+    print('{} '.format(counter), end='')
+    sys.stdout.flush()
+    lock.release()"""
 
 
 lock = threading.Lock() # Создает объект блокировки lock, который используется для синхронизации потоков.
