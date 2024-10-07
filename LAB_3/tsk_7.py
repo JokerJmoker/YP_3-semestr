@@ -36,7 +36,7 @@ def calculate_sum(N, array, result_label):
 
 
 def main():
-    array_size = 10000000
+    array_size = 10_000_000
     array = [random.randint(1, 100) for _ in range(array_size)]
 
     root = tk.Tk()
