@@ -20,7 +20,7 @@ def thread_job(suffix):  # определяем работу, передающу
 
 def run_threads(first_ip, last_ip):
     threads = [
-        threading.Thread(target=thread_job, args=(i,))  # кортеж
+        threading.Thread(target=thread_job, args=(i,)) 
         for i in range(first_ip, last_ip)  # выбираем диапазон проверяемых ip
     ]
     for thread in threads:
@@ -44,16 +44,16 @@ def apply_ineffective_solution(first_ip, last_ip):
 first_ip = 20
 last_ip = 30
 
-# Измерение времени выполнения run_threads
-start_time = time.time()  # фиксируем время начала
+# Дублирование кода -_-
+
+start_time = time.time()  
 run_threads(first_ip, last_ip)
-end_time = time.time()  # фиксируем время окончания
+end_time = time.time()  
 print(f"Время выполнения программы при помощи потоков: {end_time - start_time:.2f} секунд\n")
 
-# Измерение времени выполнения apply_ineffective_solution
-start_time = time.time()  # фиксируем время начала
+start_time = time.time()  
 apply_ineffective_solution(first_ip, last_ip)
-end_time = time.time()  # фиксируем время окончания
+end_time = time.time()  
 print(f"Время выполнения программы без помощи потоков: {end_time - start_time:.2f} секунд\n")
 
 input("Нажмите Enter, чтобы выйти...")
