@@ -1,7 +1,7 @@
 import urllib.request
 import threading
 import time
-
+import queue
 
 
 urls = [
@@ -12,18 +12,13 @@ urls = [
 
 
 def read_url(url):
-    with urllib.request.urlopen(url) as u:
-        return u.read()
+    with urllib.request.urlopen(url) as url: # открываем соединение по указанному url,которое при помощи with закроестя при выходе из блока  
+        return url.read()
 
-
-def read_url_by_thread(url):
-    with urllib.request.urlopen(url) as u:
-            return u.read()
     
-
 def run_threads(urls):
     threads = [
-        threading.Thread(target=read_url_by_thread, args=(url,)) # кортеж , 
+        threading.Thread(target=read_url, args=(url,))  
         for url in urls # выбираем диапазон проверяемых ip
     ]
     for thread in threads:
@@ -40,3 +35,5 @@ print('время выполнения задачи без использова�
 start = time.time()
 run_threads(urls)
 print('время выполнения задачи c использованием потоков' , time.time() - start)
+
+input("Нажмите Enter, чтобы выйти...")

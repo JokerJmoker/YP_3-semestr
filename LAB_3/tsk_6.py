@@ -1,13 +1,14 @@
-import os, re
+import os
+import re
 import threading
+import time  # Импортируем модуль для работы со временем
 
-
-received_packages = re.compile(r"(\d) received")
+received_packages = re.compile(r"(\d) received")  # объект регулярного выражения
 status = ("no response", "alive but losses", "alive")
 
-def thread_job(suffix): # определяем работу,передающуюся потоку
+def thread_job(suffix):  # определяем работу, передающуюся потоку
     ip = "192.168.178." + str(suffix)
-    ping_out = os.popen("ping -q -c2 " + ip, "r")  # получение вердикта
+    ping_out = os.popen("ping -q -c2 " + ip, "r")  # получение вердикта 
     print("... pinging ", ip)
     while True:
         line = ping_out.readline()
@@ -17,19 +18,18 @@ def thread_job(suffix): # определяем работу,передающую
         if n_received:
             print(ip + ": " + status[int(n_received[0])])
 
-
-def run_threads(first_ip,last_ip):
+def run_threads(first_ip, last_ip):
     threads = [
-        threading.Thread(target=thread_job, args=(i,)) # кортеж , 
-        for i in range (first_ip,last_ip) # выбираем диапазон проверяемых ip
+        threading.Thread(target=thread_job, args=(i,))  # кортеж
+        for i in range(first_ip, last_ip)  # выбираем диапазон проверяемых ip
     ]
     for thread in threads:
         thread.start()  # каждый поток должен быть запущен
     for thread in threads:
         thread.join()  # дожидаемся исполнения всех потоков
 
-def apply_ineffective_solution():
-    for suffix in range(20, 30):
+def apply_ineffective_solution(first_ip, last_ip):
+    for suffix in range(first_ip, last_ip):
         ip = "192.168.178." + str(suffix)
         ping_out = os.popen("ping -q -c2 " + ip, "r")  # получение вердикта
         print("... pinging ", ip)
@@ -41,7 +41,19 @@ def apply_ineffective_solution():
             if n_received:
                 print(ip + ": " + status[int(n_received[0])])
 
+first_ip = 20
+last_ip = 30
 
-run_threads(20,30)
-print('\n')
-apply_ineffective_solution()
+# Измерение времени выполнения run_threads
+start_time = time.time()  # фиксируем время начала
+run_threads(first_ip, last_ip)
+end_time = time.time()  # фиксируем время окончания
+print(f"Время выполнения программы при помощи потоков: {end_time - start_time:.2f} секунд\n")
+
+# Измерение времени выполнения apply_ineffective_solution
+start_time = time.time()  # фиксируем время начала
+apply_ineffective_solution(first_ip, last_ip)
+end_time = time.time()  # фиксируем время окончания
+print(f"Время выполнения программы без помощи потоков: {end_time - start_time:.2f} секунд\n")
+
+input("Нажмите Enter, чтобы выйти...")
