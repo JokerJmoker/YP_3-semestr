@@ -1,9 +1,0 @@
-
-Генерация траектории с помощью generate_viterbi_trajectory.py:
-
-python generate_viterbi_trajectory.py graph.ldj localization_config.json output_trajectory.json
-
-Сравнение траекторий с помощью correspond_trajectories.py:
-
-python correspond_trajectories.py true_trajectory.json output_trajectory.json
-

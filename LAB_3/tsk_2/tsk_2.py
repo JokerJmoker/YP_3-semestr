@@ -7,7 +7,7 @@ import os  # Импортируем модуль для работы с файл
 url = 'https://www.google.ru/search?q=котики'
 
 async def google_session(): 
-    async with aiohttp.ClientSession() as session:  # создание асинхронной сессии
+    async with aiohttp.ClientSession() as session:  # создание асинхронной сессии . with - контекстный менеджер. Закроет сессию после окончания работы
         async with session.get(url) as response:    # выполнение GET-запроса
             html = await response.text()           # получение содержимого ответа
             soup = BeautifulSoup(html, 'lxml')     # парсинг HTML с помощью BeautifulSoup
