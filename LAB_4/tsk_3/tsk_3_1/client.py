@@ -14,8 +14,8 @@ def receive_messages(sock):
  
 def main(): 
     try: 
-        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-        client.connect(('localhost', 55000))  # подключаемся к серверу 
+        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Создаётся сокет клиента. В данном случае используется IPv4 (AF_INET) и протокол TCP (SOCK_STREAM).
+        client.connect(('localhost', 55000))  # клиент подключается к серверу на локальном хосте
  
         # запускаем поток для получения сообщений 
         threading.Thread(target=receive_messages, args=(client,), daemon=True).start() 
