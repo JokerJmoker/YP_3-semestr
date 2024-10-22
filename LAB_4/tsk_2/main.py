@@ -1,33 +1,35 @@
-from classes import BST  # Импортируем BST из bst.py
+import os
+from classes import Tree  
 
 def main():
-    bst = BST()
-    backup_file = 'tree_backup.pkl'
+    tree = Tree()
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    backup_file = os.path.join(current_directory, 'tree_backup.pkl')
     
-    # Вывод доступных команд при старте программы
-    bst.show_commands()
+ 
+    tree.show_commands()
     
     while True:
-        command = input("Введите команду: ").strip().split()
+        command = input("Введите команду: ").strip().split() # убираем пробелы и разбиваем строку список слов
         
-        if len(command) == 0:
+        if len(command) == 0: # проверка на пустую команду - список команд пустой 
             continue
         
-        cmd = command[0]
+        cmd = command[0] # извлечение первого слова из списка - т.е команды 
         
         if cmd == "add":
-            if len(command) > 1:
+            if len(command) > 1: # проверка наличия аргументов ["command",[arg]]
                 try:
-                    bst.add(int(command[1]))
+                    tree.add(int(command[1])) # работаем только с int 
                 except ValueError:
                     print("Ошибка: Необходимо ввести целое число.")
             else:
                 print("Ошибка: Необходимо указать число.")
-        
+        # по аналогии 
         elif cmd == "find":
             if len(command) > 1:
                 try:
-                    found, level, direction = bst.find(int(command[1]))
+                    found, level, direction = tree.find(int(command[1]))
                     if found:
                         print(f"Найдено на уровне {level}. Направление: {direction}.")
                     else:
@@ -40,25 +42,25 @@ def main():
         elif cmd == "delete":
             if len(command) > 1:
                 try:
-                    bst.delete(int(command[1]))
+                    tree.delete(int(command[1]))
                 except ValueError:
                     print("Ошибка: Необходимо ввести целое число.")
             else:
                 print("Ошибка: Необходимо указать число.")
         
         elif cmd == "print":
-            bst.print_tree()
+            tree.print_tree()
         
         elif cmd == "clear":
-            bst.clear()
+            tree.clear()
             print("Дерево очищено.")
         
         elif cmd == "dump":
-            bst.dump(backup_file)
+            tree.dump(backup_file)
             print("Резервная копия дерева создана.")
         
         elif cmd == "load":
-            bst.load(backup_file)
+            tree.load(backup_file)
         
         elif cmd == "exit":
             print("Завершение работы.")
